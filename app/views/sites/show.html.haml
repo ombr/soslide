@@ -2,8 +2,11 @@
 - @site.operations.each do |o|
   %h3
     = o.command
+    - if o.args
+      - o.args.each do |arg|
+        =arg
     %small
-      - if o.args
-        - o.args.each do |arg|
-          =arg
-  = o.logs
+      =distance_of_time_in_words(o.updated_at,o.created_at, include_seconds: true)
+      = "(#{(o.updated_at-o.created_at).to_i} seconds)"
+  %pre
+    = o.logs
