@@ -1,0 +1,35 @@
+.sites-create,
+.sites-new
+  label
+    display: none
+  .site-name
+    position: relative
+    margin: 50px auto
+    .control-label
+      display: none
+    .url
+      position: absolute
+      font-size: $font-size-large
+      padding: $padding-large-vertical $padding-large-horizontal
+      color: #bbb
+      left: 50%
+      padding-left: 0
+    .controls
+      &:after
+        position: absolute
+        right: 0
+        top: 0
+        font-size: $font-size-large
+        padding: $padding-large-vertical $padding-large-horizontal
+      &.has-warning:after
+        content: ''
+      &.has-success:after
+        content: '\02713'
+      &.has-error:after
+        content: 'X'
+      position: relative
+      z-index: 2
+    input
+      background: none
+      padding-right: 50%
+      text-align: right
