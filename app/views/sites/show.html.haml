@@ -1,1 +1,9 @@
 = @site.name
+- @site.operations.each do |o|
+  %h3
+    = o.command
+    %small
+      - if o.args
+        - o.args.each do |arg|
+          =arg
+  = o.logs
