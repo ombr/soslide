@@ -16,7 +16,7 @@ describe Site do
         puts 'DATABASE_URL lalala'
       end.with('addons:add', ['heroku-postgresql', '-a', 'my_app'])
       expect(subject.heroku('addons:add heroku-postgresql -a', 'my_app')).to eq "DATABASE_URL lalala\n"
-      expect(subject.operations.first.command).to eq 'addons:add heroku-postgresql -a'
+      expect(subject.operations.first.command).to eq 'heroku addons:add heroku-postgresql -a'
       expect(subject.operations.first.args).to eq ['my_app']
     end
   end

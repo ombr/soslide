@@ -102,7 +102,7 @@ class Site < ActiveRecord::Base
 
   def heroku command, *arguments
     operations.create!(
-      command: command,
+      command: "heroku #{command}",
       args: arguments
     ).execute do
       args = command.split(' ') + arguments
