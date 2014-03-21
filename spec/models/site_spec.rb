@@ -9,10 +9,6 @@ describe Site do
   it { should_not allow_value('12studiocuicui', '12', 'sup').for(:name) }
   it { should have_many(:operations) }
 
-  module Heroku
-    class Command
-    end
-  end
   describe '#heroku' do
     it 'execute an heroku command' do
       Heroku::Command.stub(:load)

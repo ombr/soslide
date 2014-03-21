@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/ombr/uptimerobot-ruby.git
+  revision: e3f6de9b8266037c7660d801807f01a4e6e73953
+  specs:
+    uptimerobot-ruby (0.0.1)
+      awesome_print
+      httparty
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,6 +39,11 @@ GEM
       multi_json
     arel (4.0.2)
     atomic (1.1.16)
+    awesome_print (1.2.0)
+    aws-sdk (1.37.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -76,6 +89,7 @@ GEM
     email_validator (1.4.0)
       activemodel
     erubis (2.7.0)
+    excon (0.32.1)
     execjs (2.0.2)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -88,8 +102,20 @@ GEM
       thor (>= 0.13.6)
     haml (4.0.5)
       tilt
+    heroku (3.6.0)
+      heroku-api (~> 0.3.17)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.7)
+      rest-client (~> 1.6.1)
+      rubyzip
+    heroku-api (0.3.18)
+      excon (~> 0.27)
+      multi_json (~> 1.8)
     high_voltage (2.1.0)
     hike (1.2.3)
+    httparty (0.13.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
@@ -106,9 +132,11 @@ GEM
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.9.2)
+    multi_xml (0.5.5)
     neat (1.5.0)
       bourbon (>= 2.1)
       sass (>= 3.2)
+    netrc (0.7.7)
     newrelic_rpm (3.7.3.204)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -141,6 +169,8 @@ GEM
     rake (10.1.1)
     recipient_interceptor (0.1.2)
       mail
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec-core (2.14.8)
     rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -153,6 +183,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rubyzip (1.1.2)
     safe_yaml (1.0.1)
     sass (3.2.16)
     sass-rails (4.0.2)
@@ -202,6 +233,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uuidtools (2.1.4)
     webmock (1.17.4)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
@@ -213,6 +245,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
+  aws-sdk
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.1.1)
@@ -227,6 +260,7 @@ DEPENDENCIES
   flutie
   foreman
   haml
+  heroku
   high_voltage
   jquery-rails
   launchy
@@ -248,4 +282,5 @@ DEPENDENCIES
   title
   uglifier
   unicorn
+  uptimerobot-ruby!
   webmock

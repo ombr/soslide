@@ -23,6 +23,10 @@ gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass', '~> 3.1.1'
 
+gem 'heroku'
+gem 'aws-sdk'
+gem 'uptimerobot-ruby', github: 'ombr/uptimerobot-ruby'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

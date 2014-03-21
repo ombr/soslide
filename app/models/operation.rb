@@ -11,6 +11,7 @@ class Operation < ActiveRecord::Base
       rescue Exception => e
         exception = e
         puts e.inspect
+        puts e.backtrace.join("\n")
       end
     end
     self.logs += new_logs
