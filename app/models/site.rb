@@ -7,6 +7,7 @@ class Site < ActiveRecord::Base
 
   def create_site
     heroku('fork', heroku_name, '-a', ENV['APP_PREFIX'])
+    update(status_app: true)
     delay.setup_domain
     delay.init_database
     delay.uptimerobot_create
@@ -14,7 +15,7 @@ class Site < ActiveRecord::Base
 
   def uptimerobot_create
     operations.create!(
-      command: 'AWS::Route53#Create',
+      command: 'UpTimeRobot#Create',
       args: [domain]
     ).execute do
       if ENV['UPTIMEROBOT']
@@ -37,6 +38,7 @@ class Site < ActiveRecord::Base
     add_database
     heroku('run rake db:schema:load -a', heroku_name)
     heroku('restart -a', heroku_name)
+    update(status_database: true)
   end
 
   def add_database
@@ -69,6 +71,7 @@ class Site < ActiveRecord::Base
           }
         }]
       }})
+      update(status_dns: true)
       puts 'OK'
     end
   end
@@ -76,6 +79,7 @@ class Site < ActiveRecord::Base
   def set_domain
     heroku 'domains:add', domain, '-a', heroku_name
     heroku 'config:set', "DOMAIN=#{domain}", '-a', heroku_name
+    update(status_domain: true)
   end
 
   def domain
@@ -88,6 +92,9 @@ class Site < ActiveRecord::Base
         name: domain,
         url: "http://#{domain}"
       )
+      update(status_monitoring: true)
+    else
+      update(status_monitoring: false)
     end
   end
 
@@ -105,5 +112,18 @@ class Site < ActiveRecord::Base
       Heroku::Command.load
       Heroku::Command.run(cmd, args)
     end
+  end
+  def progress
+    progress = 10
+    progress += 25 if status_app
+    progress += 12 if status_dns
+    progress += 13 if status_domain
+    progress += 30 if status_database
+    progress += 10 if status_monitoring
+    progress
+  end
+
+  after_update do
+    Pusher[id.to_s].trigger('update', progress: "#{progress}%")
   end
 end

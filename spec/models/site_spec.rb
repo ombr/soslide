@@ -21,6 +21,17 @@ describe Site do
     end
   end
 
+  describe '#progress' do
+    context 'when not created' do
+      it { expect(subject.progress).to eq 10 }
+    end
+    context 'when everything is done' do
+      subject { create :site, status_dns: true, status_monitoring: true, status_domain: true, status_app: true, status_database: true}
+      it { expect(subject.progress).to eq 100 }
+    end
+
+  end
+
   describe '#heroku_name' do
     it { expect(subject.heroku_name).to eq "#{ENV['APP_PREFIX']}-#{subject.name}" }
   end

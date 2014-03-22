@@ -24,8 +24,10 @@ gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
+gem 'font-awesome-rails'
 
 gem 'heroku'
+gem 'pusher'
 gem 'aws-sdk'
 gem 'uptimerobot-ruby', github: 'ombr/uptimerobot-ruby'
 

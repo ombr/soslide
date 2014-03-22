@@ -6,8 +6,11 @@ class SitesController < ApplicationController
   def create
     @site = Site.new site_params
     if @site.save
+      @site.delay.create_site
       redirect_to site_path(id: @site)
     else
+      site = Site.where('name=? and email=?', site_params[:name], site_params[:email]).first
+      return redirect_to site_path(id: site) if site
       render :new
     end
   end

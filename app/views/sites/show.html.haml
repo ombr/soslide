@@ -1,4 +1,12 @@
-= @site.name
+%h1= @site.name
+
+- if @site.progress == 100
+  %h1= t '.ready', default: 'Your application is ready'
+- else
+  %h1= t '.in_progress', default: 'Creation in progress'
+.progress.progress-striped.active
+  .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => @site.progress, :role => 'progressbar', :style => "width: #{@site.progress}%;"}
+    ="#{@site.progress}%"
 - @site.operations.each do |o|
   %h3
     = o.command
@@ -10,3 +18,13 @@
       = "(#{(o.updated_at-o.created_at).to_i} seconds)"
   %pre
     = o.logs
+- content_for :javascript do
+  = javascript_include_tag 'http://js.pusher.com/2.1/pusher.min.js'
+  :coffee
+    window.pusher = new Pusher('#{Pusher.key}', {cluster: 'eu'})
+    window.pusher.subscribe('#{@site.id}').bind 'update',(data)->
+      if data['progress'] == '100%'
+        window.location = window.location
+      else
+        $('.progress-bar').css('width', data['progress'])
+        $('.progress-bar').html(data['progress'])

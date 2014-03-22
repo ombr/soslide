@@ -41,7 +41,22 @@ describe SitesController do
   end
 
   describe 'POST #create' do
-    it 'render new with wrond email' do
+    context 'when success' do
+      before :each do
+        Site.any_instance.should_receive(:create_site).and_return(true)
+      end
+
+      it 'redirect to show' do
+        post :create, {
+          site: {
+            name: 'studiocuicui',
+            email: 'luc@boissaye.fr'
+          }
+        }
+        expect(response).to redirect_to site_path(id: Site.first)
+      end
+    end
+    it 'render new with wrong email' do
       post :create, {
         site: {
           name: 'studiocuicui',
@@ -51,14 +66,14 @@ describe SitesController do
       expect(response).to render_template(:new)
     end
 
-    it 'redirect to show' do
+    it 'redirects to show if we are using the same email' do
       post :create, {
         site: {
-          name: 'studiocuicui',
-          email: 'luc@boissaye.fr'
+          name: site.name,
+          email: site.email
         }
       }
-      expect(response).to redirect_to site_path(Site.first)
+      expect(response).to redirect_to site_path(id: site)
     end
   end
 

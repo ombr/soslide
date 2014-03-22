@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322152317) do
+ActiveRecord::Schema.define(version: 20140322153955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 20140322152317) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "email"
+    t.boolean  "status_app"
+    t.boolean  "status_database"
+    t.boolean  "status_monitoring"
+    t.boolean  "status_dns"
+    t.boolean  "status_domain"
   end
 
   add_index "sites", ["name"], name: "index_sites_on_name", unique: true, using: :btree
