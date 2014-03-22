@@ -23,6 +23,9 @@ build:
                name: ENV
                code: export SECRET_KEY_BASE=test
 
+        - script:
+               name: rspec
+               code: bundle exec rake db:migrate
         # Add more steps here:
         - script:
                name: rspec
