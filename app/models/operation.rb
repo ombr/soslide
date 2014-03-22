@@ -9,6 +9,7 @@ class Operation < ActiveRecord::Base
       begin
         yield
       rescue Exception => e
+        Raven.capture_exception(e)
         exception = e
         puts e.inspect
         puts e.backtrace.join("\n")

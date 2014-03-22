@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.1.1'
 
-gem 'airbrake'
 gem 'bourbon'
+gem 'sentry-raven'
 gem 'coffee-rails'
 gem 'delayed_job_active_record', '>= 4.0.0'
 gem 'email_validator'
@@ -22,6 +22,7 @@ gem 'uglifier'
 gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass', '~> 3.1.1'
+gem 'redcarpet'
 
 gem 'heroku'
 gem 'aws-sdk'

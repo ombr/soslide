@@ -28,12 +28,6 @@ class Site < ActiveRecord::Base
     end
   end
 
-  def uptimerobot_delete
-    UptimeRobot::Monitor.destroy(
-      name: domain,
-    )
-  end
-
   def heroku_name
     "#{ENV['APP_PREFIX']}-#{name}"
   end
@@ -52,8 +46,8 @@ class Site < ActiveRecord::Base
   end
 
   def setup_domain
+    delay.set_domain
     create_domain
-    set_domain
   end
 
   def create_domain

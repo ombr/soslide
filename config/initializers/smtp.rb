@@ -1,10 +1,10 @@
 if Rails.env.staging? || Rails.env.production?
   SMTP_SETTINGS = {
-    address: ENV.fetch('SMTP_ADDRESS'), # example: 'smtp.sendgrid.net'
+    address: ENV.fetch('SMTP_ADDRESS'),
     authentication: :plain,
-    domain: ENV.fetch('SMTP_DOMAIN'), # example: 'this-app.com'
+    domain: ENV.fetch('DOMAIN'),
     password: ENV.fetch('SMTP_PASSWORD'),
-    port: '587',
+    port: ENV.fetch('SMTP_PORT'),
     user_name: ENV.fetch('SMTP_USERNAME')
   }
 end

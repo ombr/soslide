@@ -24,6 +24,17 @@ describe Operation do
         expect(subject.reload.logs).to eq "lala\nTEST !\n"
       end
     end
+
+    it 'Send the exception to sentry' do
+      Raven.should_receive(:capture_exception)
+      begin
+        subject.execute do
+          raise 'SoSlide'
+        end
+      rescue
+      end
+    end
+
     it 'log exception and add it to the log' do
       begin
         subject.execute do
