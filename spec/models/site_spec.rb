@@ -20,4 +20,8 @@ describe Site do
       expect(subject.operations.first.args).to eq ['my_app']
     end
   end
+
+  describe '#heroku_name' do
+    it { expect(subject.heroku_name).to eq "#{ENV['APP_PREFIX']}-#{subject.name}" }
+  end
 end
