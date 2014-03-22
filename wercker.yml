@@ -19,14 +19,9 @@ build:
         # A step that prepares the database.yml using the database in services
         - rails-database-yml
 
-        # A custom script step, name value is used in the UI
-        # and the code value contains the command that get executed
         - script:
-            name: echo ruby information
-            code: |
-                echo "ruby version $(ruby --version) running"
-                echo "from location $(which ruby)"
-                echo -p "gem list: $(gem list)"
+               name: ENV
+               code: export SECRET_KEY_BASE=test
 
         # Add more steps here:
         - script:
