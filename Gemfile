@@ -23,7 +23,6 @@ gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
-gem 'rails_12factor'
 
 gem 'heroku'
 gem 'aws-sdk'
@@ -55,5 +54,6 @@ group :test do
 end
 
 group :staging, :production do
+  gem 'rails_12factor'
   gem 'newrelic_rpm', '>= 3.6.7'
 end
