@@ -5,12 +5,7 @@ class PagesController < ApplicationController
   private
 
   def layout_for_page
-    case params[:id]
-    when '500'
-      'standalone'
-    when '404'
-      'standalone'
-    when '503'
+    if %w[500 404 503].include?(params[:id])
       'standalone'
     else
       'application'

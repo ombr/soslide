@@ -13,7 +13,11 @@ class SitesController < ApplicationController
   end
 
   def show
-    @site = Site.find(params[:id])
+    @site = Site.where("id = ? OR name = ?", params[:id].to_i, params[:id]).first
+    respond_to do |format|
+      format.html
+      format.json { render json: @site.as_json(only: [:name]) }
+    end
   end
 
   private

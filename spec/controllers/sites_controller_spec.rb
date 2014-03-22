@@ -17,13 +17,26 @@ describe SitesController do
   end
 
   describe 'GET #show' do
-    before :each do
-      get :show, id: site
-    end
-    it_responds_200
+    context 'with an id' do
+      before :each do
+        get :show, id: site
+      end
+      it_responds_200
 
-    it 'assigns @site' do
-      expect(assigns(:site)).to eq site
+      it 'assigns @site' do
+        expect(assigns(:site)).to eq site
+      end
+    end
+
+    context 'with a name in json' do
+      it 'it returns app information' do
+        get :show, {
+          id: site.name,
+          format: :json
+        }
+        expect(JSON.parse(response.body)['name']).to eq site.name
+        expect(JSON.parse(response.body)['email']).to be_nil
+      end
     end
   end
 
