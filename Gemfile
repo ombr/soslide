@@ -23,6 +23,7 @@ gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
+gem 'rails_12factor'
 
 gem 'heroku'
 gem 'aws-sdk'
