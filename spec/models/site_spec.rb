@@ -35,4 +35,12 @@ describe Site do
   describe '#heroku_name' do
     it { expect(subject.heroku_name).to eq "#{ENV['APP_PREFIX']}-#{subject.name}" }
   end
+
+  describe '#url' do
+    it{ expect(subject.url).to eq "http://#{subject.domain}/" }
+  end
+
+  describe '#admin_url' do
+    it{ expect(subject.admin_url).to eq "http://#{subject.domain}/admin" }
+  end
 end

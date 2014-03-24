@@ -123,6 +123,13 @@ class Site < ActiveRecord::Base
     progress
   end
 
+  def url
+    "http://#{domain}/"
+  end
+  def admin_url
+    "#{url}admin"
+  end
+
   after_update do
     Pusher[id.to_s].trigger('update', progress: "#{progress}%")
   end
