@@ -107,12 +107,29 @@ class Site < ActiveRecord::Base
       command: "heroku #{command}",
       args: arguments
     ).execute do
-      args = command.split(' ') + arguments
-      cmd = args.shift
-      Heroku::Command.load
-      Heroku::Command.run(cmd, args)
+      self.class.heroku_exec(command, *arguments)
     end
   end
+
+  def self.import_sites
+    exeption, logs = Operation.safe_execution do
+      heroku_exec('apps')
+    end
+    logs.split("\n").each do |line|
+      if line.match(/^([^ ]*-[^ ]*) .*$/)
+        puts "===>#{$1}"
+      end
+    end
+    ''
+  end
+
+  def self.heroku_exec *arguments
+    args = arguments.map {|a| a.split(' ') }.flatten
+    cmd = args.shift
+    Heroku::Command.load
+    Heroku::Command.run(cmd, args)
+  end
+
   def progress
     progress = 10
     progress += 25 if status_app
@@ -130,7 +147,31 @@ class Site < ActiveRecord::Base
     "#{url}admin"
   end
 
+  def config_get var
+    heroku('config:get', var, '-a', heroku_name)
+  end
+
+  def connection
+    connection = ActiveRecord::Base
+      .establish_connection(config_get('DATABASE_URL'))
+      .connection
+    yield connection
+    ActiveRecord::Base.establish_connection
+  end
+
+  def update_stats
+    connection do |connection|
+      puts connection.execute('SELECT COUNT(pages) FROM pages').to_a.inspect
+      puts connection.execute('SELECT * FROM sites').to_a.inspect
+      puts connection.execute('SELECT * FROM users').to_a.inspect
+    end
+  end
+
+
   after_update do
+    Poussette.upate_site(site)
     Pusher[id.to_s].trigger('update', progress: "#{progress}%")
   end
+
+   #ActiveRecord::Base.establish_connection('postgres://qzbhblrwdhpskg:qCL5zol8nF1ahOHIF2xuJPgaSW@ec2-54-220-0-117.eu-west-1.compute.amazonaws.com:5432/dbsd9jh2birjn5').connection.execute('SELECT * FROM users').to_active re
 end

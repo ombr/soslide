@@ -2,10 +2,21 @@ class Operation < ActiveRecord::Base
   serialize :args
   belongs_to :site
 
+
   def execute
     self.logs ||= ''
+    exception, new_logs = self.class.safe_execution do
+      yield
+    end
+    self.logs += new_logs
+    self.save!
+    raise exception if exception
+    new_logs
+  end
+
+  def self.safe_execution
     exception = nil
-    new_logs = capture(:stdout) do
+    logs = capture(:stdout) do
       begin
         yield
       rescue Exception => e
@@ -15,9 +26,6 @@ class Operation < ActiveRecord::Base
         puts e.backtrace.join("\n")
       end
     end
-    self.logs += new_logs
-    self.save!
-    raise exception if exception
-    new_logs
+    [exception, logs]
   end
 end
