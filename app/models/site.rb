@@ -155,13 +155,17 @@ class Site < ActiveRecord::Base
     connection = ActiveRecord::Base
       .establish_connection(config_get('DATABASE_URL'))
       .connection
-    yield connection
-    ActiveRecord::Base.establish_connection
+    begin
+      yield connection
+    ensure
+      ActiveRecord::Base.establish_connection
+    end
   end
 
   def update_stats
     connection do |connection|
-      puts connection.execute('SELECT COUNT(pages) FROM pages').to_a.inspect
+      puts connection.execute('SELECT COUNT(*) AS pages FROM pages').to_a.inspect
+      puts connection.execute('SELECT COUNT(*) AS images FROM images').to_a.inspect
       puts connection.execute('SELECT * FROM sites').to_a.inspect
       puts connection.execute('SELECT * FROM users').to_a.inspect
     end
@@ -169,7 +173,6 @@ class Site < ActiveRecord::Base
 
 
   after_update do
-    Poussette.upate_site(site)
     Pusher[id.to_s].trigger('update', progress: "#{progress}%")
   end
 
