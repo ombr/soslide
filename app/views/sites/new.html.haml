@@ -1,10 +1,31 @@
-.row
-  .col-md-12
+%section.row.register
+  .col-md-5.col-md-offset-2
     %h1=t '.title', default: 'Be Simple !'
-  .col-md-3.col-md-offset-5
+  .col-md-4
     = simple_form_for @site do |f|
       = f.input :email, placeholder: 'your@email.com', input_html: { autofocus: :autofocus, class: 'input-lg' }
       .site-name
         %span.url= ".#{ENV['SITES_DOMAINS']}"
         = f.input :name, label: '', input_html: { class: 'input-lg'}
       = f.submit t('.try', default: 'Create my site'), class: 'btn btn-success', disabled: :disabled
+.row
+  .col-sm-10.col-sm-offset-1
+    .col-sm-4
+      .feature
+        %h1.fa.fa-magic Simple
+        .description Your application is ready to show in 5 minutes.
+    .col-sm-4
+      .feature
+        .devices
+          .fa.fa-mobile
+          .fa.fa-desktop
+          .fa.fa-tablet
+        %h1 Multi devices
+        .description you have one single responsive website.
+    .col-sm-4
+      .feature
+        %h1.fa.fa-home Your name
+        .description You get your own domain. Not a SoSlide.com domain.
+    .col-xs-12
+      = link_to page_path('feature'), class: 'pull-right btn btn-link' do
+        More features
