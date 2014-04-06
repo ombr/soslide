@@ -1,4 +1,5 @@
 en:
+  quote: 'Be Simple'
   date:
     formats:
       default: '%m/%d/%Y'

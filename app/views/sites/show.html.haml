@@ -1,23 +1,23 @@
-%h1= @site.name
-
 - if @site.progress == 100
   %h1= t '.ready', default: 'Your application is ready'
+  = link_to @site.url, @site.url, class: 'btn btn-success btn-lg'
 - else
   %h1= t '.in_progress', default: 'Creation in progress'
-.progress.progress-striped.active
-  .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => @site.progress, :role => 'progressbar', :style => "width: #{@site.progress}%;"}
-    ="#{@site.progress}%"
-- @site.operations.each do |o|
-  %h3
-    = o.command
-    - if o.args
-      - o.args.each do |arg|
-        =arg
-    %small
-      =distance_of_time_in_words(o.updated_at,o.created_at, include_seconds: true)
-      = "(#{(o.updated_at-o.created_at).to_i} seconds)"
-  %pre
-    = o.logs
+  .progress.progress-striped.active
+    .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => @site.progress, :role => 'progressbar', :style => "width: #{@site.progress}%;"}
+      ="#{@site.progress}%"
+.logs
+  - @site.operations.each do |o|
+    %h3
+      = o.command
+      - if o.args
+        - o.args.each do |arg|
+          =arg
+      %small
+        =distance_of_time_in_words(o.updated_at,o.created_at, include_seconds: true)
+        = "(#{(o.updated_at-o.created_at).to_i} seconds)"
+    %pre
+      = o.logs
 - content_for :javascript do
   = javascript_include_tag 'http://js.pusher.com/2.1/pusher.min.js'
   :coffee

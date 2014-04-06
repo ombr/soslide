@@ -5,7 +5,9 @@ class Site < ActiveRecord::Base
   validates :email, email: { strict_mode: true }
   serialize :infos
 
-  has_many :operations
+  has_many :operations, dependent: :destroy
+
+  before_create :set_heroku_name
 
   def create_site
     heroku('fork', heroku_name, '-a', ENV['APP_PREFIX'])
@@ -104,7 +106,7 @@ class Site < ActiveRecord::Base
     heroku 'apps:destroy', '-a', heroku_name, '--confirm', heroku_name
   end
 
-  def heroku command, *arguments
+  def heroku(command, *arguments)
     operations.create!(
       command: "heroku #{command}",
       args: arguments
@@ -114,24 +116,25 @@ class Site < ActiveRecord::Base
   end
 
   def self.sync
-    (heroku_apps-pluck(:heroku_name)).each do |app|
-      name = app.gsub('prtfl-','').gsub('ombr-gallerie-','')
+    (heroku_apps - pluck(:heroku_name)).each do |app|
+      name = app.gsub('prtfl-', '').gsub('ombr-gallerie-', '')
       Site.create! heroku_name: app, name: name, email: 'contact@soslide.com'
     end
   end
 
   def self.heroku_apps
-    Operation.create!(command: 'heroku apps').execute do
+    logs = Operation.create!(command: 'heroku apps').execute do
       heroku_exec('apps')
-    end.split("\n").map do |line|
+    end
+    logs.split("\n").map do |line|
       if line.match(/^([^ ]*-[^ ]*) .*$/)
         $1
       end
     end.compact
   end
 
-  def self.heroku_exec *arguments
-    args = arguments.map {|a| a.split(' ') }.flatten
+  def self.heroku_exec(*arguments)
+    args = arguments.map { |a| a.split(' ') }.flatten
     cmd = args.shift
     Heroku::Command.load
     Heroku::Command.run(cmd, args)
@@ -190,5 +193,11 @@ class Site < ActiveRecord::Base
 
   after_update do
     Pusher[id.to_s].trigger('update', progress: "#{progress}%")
+  end
+
+  private
+
+  def set_heroku_name
+    self.heroku_name = "#{ENV['APP_PREFIX']}-#{name}" if heroku_name.nil?
   end
 end

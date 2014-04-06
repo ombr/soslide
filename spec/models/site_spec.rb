@@ -15,7 +15,7 @@ describe Site do
   it do
     should_not allow_value('12studiocuicui', '12', 'sup').for(:name)
   end
-  it { should have_many(:operations) }
+  it { should have_many(:operations).dependent(:destroy) }
 
   describe '#heroku' do
     it 'execute an heroku command' do
@@ -113,6 +113,13 @@ describe Site do
         puts File.read(Rails.root.join('spec', 'fixtures', 'heroku_apps'))
       end
       expect(Site.heroku_apps).to eq ['prtfl-cuicui']
+    end
+  end
+
+  describe 'heroku_name' do
+    it 'set heroku_name if undefined' do
+      site = Site.create email: 'luc@boissaye.fr', name: 'ombr'
+      expect(site.heroku_name).to eq "#{ENV['APP_PREFIX']}-ombr"
     end
   end
 end

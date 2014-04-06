@@ -1,6 +1,6 @@
 %section.row.register
   .col-md-5.col-md-offset-2
-    %h1=t '.title', default: 'Be Simple !'
+    %h1=t 'quote'
   .col-md-4
     = simple_form_for @site do |f|
       = f.input :email, placeholder: 'your@email.com', input_html: { autofocus: :autofocus, class: 'input-lg' }
@@ -27,5 +27,5 @@
         %h1.fa.fa-home Your name
         .description You get your own domain. Not a SoSlide.com domain.
     .col-xs-12
-      = link_to page_path('feature'), class: 'pull-right btn btn-link' do
+      = link_to page_path('features'), class: 'pull-right btn btn-link' do
         More features
