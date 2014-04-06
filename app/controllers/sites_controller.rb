@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  before_filter :authenticate, only: :index
+
   def new
     @site = Site.new
   end
@@ -23,8 +25,19 @@ class SitesController < ApplicationController
     end
   end
 
+  def index
+    #@sites = Site.order('images DESC').where('images = 0 AND pages = 0')
+    @sites = Site.order('images DESC')
+  end
+
   private
     def site_params
       params.require(:site).permit(:name, :email)
+    end
+
+    def authenticate
+      authenticate_or_request_with_http_basic do |username, password|
+        username == ENV['AUTH_USER'] && password == ENV['AUTH_PASSWORD']
+      end
     end
 end

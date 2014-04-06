@@ -5,6 +5,28 @@ describe SitesController do
 
   let(:site) { create :site }
 
+  describe 'GET #index' do
+    it 'respond 403' do
+      get :index
+      expect(response.code).to eq '401'
+    end
+    context 'with basic auth' do
+      before :each do
+        ENV['AUTH_USER'] = 'u'
+        ENV['AUTH_PASSWORD'] = 'p'
+        auth = ActionController::HttpAuthentication::Basic
+          .encode_credentials('u', 'p')
+        request.env['HTTP_AUTHORIZATION'] = auth
+        get :index
+      end
+      it_responds_200
+
+      it 'assigns @sites' do
+        expect(assigns(:sites)).to eq Site.order('images DESC')
+      end
+    end
+  end
+
   describe 'GET #new' do
     before :each do
       get :new
@@ -30,10 +52,8 @@ describe SitesController do
 
     context 'with a name in json' do
       it 'it returns app information' do
-        get :show, {
-          id: site.name,
-          format: :json
-        }
+        get :show, id: site.name, format: :json
+
         expect(JSON.parse(response.body)['name']).to eq site.name
         expect(JSON.parse(response.body)['email']).to be_nil
       end
@@ -47,32 +67,28 @@ describe SitesController do
       end
 
       it 'redirect to show' do
-        post :create, {
-          site: {
-            name: 'studiocuicui',
-            email: 'luc@boissaye.fr'
-          }
+        post :create, site: {
+          name: 'studiocuicui',
+          email: 'luc@boissaye.fr'
         }
         expect(response).to redirect_to site_path(id: Site.first)
       end
     end
     it 'render new with wrong email' do
-      post :create, {
-        site: {
-          name: 'studiocuicui',
-          email: 'luc@boissaye'
-        }
+      post :create, site: {
+        name: 'studiocuicui',
+        email: 'luc@boissaye'
       }
+
       expect(response).to render_template(:new)
     end
 
     it 'redirects to show if we are using the same email' do
-      post :create, {
-        site: {
-          name: site.name,
-          email: site.email
-        }
+      post :create, site: {
+        name: site.name,
+        email: site.email
       }
+
       expect(response).to redirect_to site_path(id: site)
     end
   end

@@ -6,6 +6,23 @@ describe Operation do
 
   it { should belong_to(:site) }
 
+  describe 'self.safe_execution' do
+    it 'capture and return stdout' do
+      exception, logs = Operation.safe_execution do
+        puts 'Hello'
+      end
+      expect(logs).to eq "Hello\n"
+      expect(exception).to be_nil
+    end
+    it 'puts the error in the log and in the exception' do
+      exception, logs = Operation.safe_execution do
+        fail 'Hello'
+      end
+      expect(logs).to match(/Hello/)
+      expect(exception.message).to eq 'Hello'
+    end
+  end
+
   describe '#execute' do
     context 'when log is nil' do
       it 'capture stdout and put it to the log' do
@@ -29,7 +46,7 @@ describe Operation do
       Raven.should_receive(:capture_exception)
       begin
         subject.execute do
-          raise 'SoSlide'
+          fail 'SoSlide'
         end
       rescue
       end
@@ -38,7 +55,7 @@ describe Operation do
     it 'log exception and add it to the log' do
       begin
         subject.execute do
-          raise 'SoSlide'
+          fail 'SoSlide'
         end
       rescue
         expect(subject.reload.logs).to match(/SoSlide/)

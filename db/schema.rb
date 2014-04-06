@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322153955) do
+ActiveRecord::Schema.define(version: 20140328220602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,13 @@ ActiveRecord::Schema.define(version: 20140322153955) do
     t.boolean  "status_monitoring"
     t.boolean  "status_dns"
     t.boolean  "status_domain"
+    t.string   "heroku_name"
+    t.integer  "pages"
+    t.integer  "images"
+    t.text     "infos"
   end
 
+  add_index "sites", ["heroku_name"], name: "index_sites_on_heroku_name", unique: true, using: :btree
   add_index "sites", ["name"], name: "index_sites_on_name", unique: true, using: :btree
 
 end

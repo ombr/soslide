@@ -7,7 +7,7 @@
       .site-name
         %span.url= ".#{ENV['SITES_DOMAINS']}"
         = f.input :name, label: '', input_html: { class: 'input-lg'}
-      = f.submit t('.try', default: 'Create my site'), class: 'btn btn-success', disabled: :disabled
+      = f.submit t('.try', default: 'Create my site'), class: 'btn btn-lg btn-success'
 .row
   .col-sm-10.col-sm-offset-1
     .col-sm-4

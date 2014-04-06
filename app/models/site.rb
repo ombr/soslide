@@ -1,7 +1,9 @@
+# Site class
 class Site < ActiveRecord::Base
   validates :name, length: { minimum: 1, maximum: 21 }, format: { with: /\A[a-z][a-z0-9-]{0,20}\z/, message: ' Name must start with a letter and can only contain lowercase letters, numbers, and dashes. Name must be between 3 to 21 characters.' }
-  validates :name, :uniqueness => true
-  validates :email, :email => {:strict_mode => true}
+  validates :name, uniqueness: true
+  validates :email, email: { strict_mode: true }
+  serialize :infos
 
   has_many :operations
 
@@ -30,9 +32,9 @@ class Site < ActiveRecord::Base
     end
   end
 
-  def heroku_name
-    "#{ENV['APP_PREFIX']}-#{name}"
-  end
+  # def heroku_name
+  #  "#{ENV['APP_PREFIX']}-#{name}"
+  # end
 
   def init_database
     add_database
@@ -42,7 +44,7 @@ class Site < ActiveRecord::Base
   end
 
   def add_database
-    res=heroku('addons:add heroku-postgresql', '-a', heroku_name)
+    res = heroku('addons:add heroku-postgresql', '-a', heroku_name)
     res.match(/.*(HEROKU_.*URL).*/)
     database_url = $1
     heroku("pg:promote #{database_url} -a #{heroku_name}")
@@ -59,18 +61,18 @@ class Site < ActiveRecord::Base
       args: [domain]
     ).execute do
       r53 = AWS::Route53.new
-      resp = r53.client.change_resource_record_sets({ :hosted_zone_id => ENV['AWS_ZONE_ID'], :change_batch => {
-        :comment => "Creating new subdomain: #{domain}", :changes => [{
-          :action => "CREATE", :resource_record_set => {
-            :name => domain,
-            :type => "CNAME",
-            :ttl => 300,
-            :resource_records => [{
-              :value => "#{heroku_name}.herokuapp.com"
+      r53.client.change_resource_record_sets({ hosted_zone_id: ENV['AWS_ZONE_ID'], change_batch: {
+        comment: "Creating new subdomain: #{domain}", changes: [{
+          action: 'CREATE', resource_record_set: {
+            name:  domain,
+            type: 'CNAME',
+            ttl: 300,
+            resource_records: [{
+              value: "#{heroku_name}.herokuapp.com"
             }]
           }
         }]
-      }})
+      } })
       update(status_dns: true)
       puts 'OK'
     end
@@ -83,7 +85,7 @@ class Site < ActiveRecord::Base
   end
 
   def domain
-    domain = "#{name}.#{ENV['SITES_DOMAINS']}"
+    "#{name}.#{ENV['SITES_DOMAINS']}"
   end
 
   def uptimerobot_create
@@ -111,16 +113,21 @@ class Site < ActiveRecord::Base
     end
   end
 
-  def self.import_sites
-    exeption, logs = Operation.safe_execution do
+  def self.sync
+    (heroku_apps-pluck(:heroku_name)).each do |app|
+      name = app.gsub('prtfl-','').gsub('ombr-gallerie-','')
+      Site.create! heroku_name: app, name: name, email: 'contact@soslide.com'
+    end
+  end
+
+  def self.heroku_apps
+    Operation.create!(command: 'heroku apps').execute do
       heroku_exec('apps')
-    end
-    logs.split("\n").each do |line|
+    end.split("\n").map do |line|
       if line.match(/^([^ ]*-[^ ]*) .*$/)
-        puts "===>#{$1}"
+        $1
       end
-    end
-    ''
+    end.compact
   end
 
   def self.heroku_exec *arguments
@@ -143,38 +150,45 @@ class Site < ActiveRecord::Base
   def url
     "http://#{domain}/"
   end
+
   def admin_url
     "#{url}admin"
   end
 
-  def config_get var
-    heroku('config:get', var, '-a', heroku_name)
+  def heroku_config(var)
+    err, logs = Operation.safe_execution do
+      self.class.heroku_exec 'config:get', var, '-a', heroku_name
+    end
+    fail err if err
+    logs
   end
 
-  def connection
-    connection = ActiveRecord::Base
-      .establish_connection(config_get('DATABASE_URL'))
-      .connection
+  def heroku_connection
+    Database
+      .establish_connection(heroku_config('DATABASE_URL'))
     begin
-      yield connection
-    ensure
-      ActiveRecord::Base.establish_connection
+      yield Database.connection
+    rescue Exception => e
+      Database.establish_connection
+      raise e
     end
   end
 
   def update_stats
-    connection do |connection|
-      puts connection.execute('SELECT COUNT(*) AS pages FROM pages').to_a.inspect
-      puts connection.execute('SELECT COUNT(*) AS images FROM images').to_a.inspect
-      puts connection.execute('SELECT * FROM sites').to_a.inspect
-      puts connection.execute('SELECT * FROM users').to_a.inspect
+    heroku_connection do |connection|
+      self.pages = connection.execute('SELECT COUNT(*) FROM pages')
+        .to_a.first['count'].to_i
+      self.images = connection.execute('SELECT COUNT(*) FROM images')
+        .to_a.first['count'].to_i
+      self.infos = {
+        users: connection.execute('SELECT * FROM users').to_a,
+        sites: connection.execute('SELECT * FROM sites').to_a
+      }
     end
+    save!
   end
-
 
   after_update do
     Pusher[id.to_s].trigger('update', progress: "#{progress}%")
   end
-
-   #ActiveRecord::Base.establish_connection('postgres://qzbhblrwdhpskg:qCL5zol8nF1ahOHIF2xuJPgaSW@ec2-54-220-0-117.eu-west-1.compute.amazonaws.com:5432/dbsd9jh2birjn5').connection.execute('SELECT * FROM users').to_active re
 end

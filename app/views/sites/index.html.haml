@@ -1,0 +1,23 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %td #
+      %td id
+      %td Name
+      %td Email
+      %td Pages
+      %td Images
+      %td Infos
+      %td Updated_at
+  %tbody
+    - @sites.each_with_index do |site, index|
+      %tr
+        %td= index
+        %td= site.id
+        %td= site.heroku_name
+        %td= site.email
+        %td= site.pages
+        %td= site.images
+        %td
+          = site.try(:infos).try(:[],:users).try(:first).try(:[],'email')
+        %td= site.updated_at

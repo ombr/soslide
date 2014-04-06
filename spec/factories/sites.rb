@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :site do
-    name "studiocuicui"
-    email "luc@boissaye.fr"
+    name 'studiocuicui'
+    email 'luc@boissaye.fr'
+    heroku_name 'prtfl-studiocuicui'
   end
 end
