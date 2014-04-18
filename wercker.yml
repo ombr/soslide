@@ -24,7 +24,10 @@ build:
                code: export SECRET_KEY_BASE=test
 
         - script:
-               name: rspec
+               name: cloudinary
+               code: export CLOUDINARY_URL=cloudinary://123123123123:sdsfsdfsdfsdfsf@sadaasdasd
+        - script:
+               name: migrate
                code: bundle exec rake db:migrate
         # Add more steps here:
         - script:
