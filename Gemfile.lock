@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/cloudinary/cloudinary_gem.git
+  revision: 22976a946af30ac7f86dc0a3a81998ba9579d886
+  branch: master
+  specs:
+    cloudinary (1.0.72)
+      aws_cf_signer
+      rest-client
+
+GIT
   remote: git://github.com/ombr/uptimerobot-ruby.git
   revision: e3f6de9b8266037c7660d801807f01a4e6e73953
   specs:
@@ -40,6 +49,7 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
+    aws_cf_signer (0.1.2)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -274,6 +284,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.1.1)
   bourbon
   capybara-webkit (>= 1.0.0)
+  cloudinary!
   coffee-rails
   database_cleaner
   delayed_job_active_record (>= 4.0.0)

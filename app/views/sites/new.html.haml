@@ -1,4 +1,4 @@
-%section.row.register
+%section#register.row
   .col-md-5.col-md-offset-2
     %h1=t 'quote'
   .col-md-4
@@ -7,25 +7,61 @@
       .site-name
         %span.url= ".#{ENV['SITES_DOMAINS']}"
         = f.input :name, label: '', input_html: { class: 'input-lg'}
-      = f.submit t('.try', default: 'Create my site'), class: 'btn btn-lg btn-success'
-.row
+      = f.submit t('.try'), class: 'btn btn-lg btn-success'
+%section#examples.row
   .col-sm-10.col-sm-offset-1
+    %h1= t '.examples'
+    - [ 'studiocuicui.fr', 'karimdaher.portfoli.fr' , 'ombr.portfoli.fr'].each do |site|
+      .col-md-4
+        =link_to "http://#{site}", alt: site, target: '_blank' do
+          = cl_image_tag("http://#{site}", sign_url: true, type: 'url2png', width: 500, gravity: :north, class: 'img-responsive')
+%section#features.row
+  .col-sm-10.col-sm-offset-1
+    %h1= t '.features'
     .col-sm-4
       .feature
-        %h1.fa.fa-magic Simple
-        .description Your application is ready to show in 5 minutes.
+        %h1
+          .fa.fa-flash.fa-5x
+          =t('.speed.title')
+        .description=t('.speed.description')
     .col-sm-4
       .feature
-        .devices
-          .fa.fa-mobile
-          .fa.fa-desktop
-          .fa.fa-tablet
-        %h1 Multi devices
-        .description you have one single responsive website.
+        %h1
+          .devices
+            .fa.fa-mobile
+            .fa.fa-desktop
+            .fa.fa-tablet
+          =t('.devices.title')
+        .description= t('.devices.description')
     .col-sm-4
       .feature
-        %h1.fa.fa-home Your name
-        .description You get your own domain. Not a SoSlide.com domain.
-    .col-xs-12
-      = link_to page_path('features'), class: 'pull-right btn btn-link' do
-        More features
+        %h1
+          .fa.fa-heart.fa-5x
+          = t('.love.title')
+        .description=t('.love.description')
+%section#pricing
+  .row
+    .col-md-10.col-md-offset-1
+      %h1= t '.pricing.title'
+      %h3= t '.pricing.subtitle'
+  .row
+    .col-md-2.col-md-offset-3
+      %h1 Free
+      %h4 $0
+      %p 250 images
+      %p soslide.com domain
+      %p Your site will be disabled after 12 hours.
+    .col-md-2
+      %h1 Pro
+      %h4
+        $20
+        %small /month
+      %p 250 images
+      %p 1 custom domain
+    .col-md-2
+      %h1 Custon plan
+      %h4 on demand
+      %p unlimited images
+      %p unlimited sites
+    .col-md-6.col-md-offset-5
+      =link_to 'Start a free trial', '#register', class: 'btn btn-success btn-lg'

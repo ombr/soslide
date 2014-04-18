@@ -1,5 +1,17 @@
 en:
-  quote: 'Be Simple'
+  quote: Be Simple
+  sites:
+    new:
+      try: Create my site
+      speed:
+        title: Fast
+        description: Do not wait anymore to show your pictures.
+      devices:
+        title: Multi devices
+        description: One responsive website for all devices any time any where.
+      love:
+        title: Made with love
+        description: We are testing our software hard to deliver the best experience.
   date:
     formats:
       default: '%m/%d/%Y'

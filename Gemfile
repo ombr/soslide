@@ -27,6 +27,8 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
 gem 'font-awesome-rails'
 
+gem 'cloudinary', github: 'cloudinary/cloudinary_gem', branch: 'master'
+
 gem 'rails-i18n', '~> 4.0.0'
 
 gem 'heroku'
