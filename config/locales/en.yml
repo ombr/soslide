@@ -1,7 +1,26 @@
 en:
-  quote: Be Simple
+  pricing:
+    pro:
+      title: Pro
+      price: $25
+      description1: Your domain
+      description2: 250 images
+    extended:
+      title: Pro extended
+      price: coming soon
+      description1: Your domain
+      description2: coming soon
+    custom:
+      title: Custom
+      price: on demand
+      description1: Your domain
+      description2: unlimited images
   sites:
     new:
+      welcome:
+        title: Be Simple
+        subtitle: Show your work quickly on every devices.
+        examples: Check the result.
       try: Create my site
       speed:
         title: Fast
@@ -12,6 +31,8 @@ en:
       love:
         title: Made with love
         description: We are testing our software hard to deliver the best experience.
+      pricing:
+         title: Pricing
   date:
     formats:
       default: '%m/%d/%Y'

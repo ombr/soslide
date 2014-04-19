@@ -1,2 +1,6 @@
 fr:
-  quote: 'Soyez Simple !'
+  sites:
+    new:
+      welcome:
+        title: 'Soyez Simple'
+        subtitle: Montrez votre travail, partout, sans attendre.

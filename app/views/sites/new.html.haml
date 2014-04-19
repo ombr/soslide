@@ -1,6 +1,36 @@
-%section#register.row
+%section#header
+  .background
+    -# %iframe.video{src: 'http://api.dmcloud.net/player/embed/53525f9806361d4eae4ef524/53525fb994a6f6482e01c737?auth=1713267714-0-9fk75olu-0bd0127155b8c25d200dd95927bc73ad&preset=5352609294a6f649e5312cb0&autoplay=1', frameborder: '0', width: '100%', height: '100%'}
+
+  -# %script{type: 'text/javascript', src:'//cdn.sublimevideo.net/js/9ckbmzmy.js'}
+  -#.video
+    :erb
+      <video id="a240e92d" class="sublime" poster="<%= asset_path('home.png')%>" width="100%" height="100%" title="Midnight Sun" data-uid="a240e92d" data-autoresize="fit" data-autoplay='true' preload="none">
+        <source src="https://cdn.sublimevideo.net/vpa/ms_720p.mp4" data-quality="hd" />
+        <source src="https://cdn.sublimevideo.net/vpa/ms_360p.mp4" />
+        <source src="https://cdn.sublimevideo.net/vpa/ms_720p.webm" data-quality="hd" />
+        <source src="https://cdn.sublimevideo.net/vpa/ms_360p.webm" />
+      </video>
+  - if params['preview']
+    %video#header-video{poster: asset_path('home.png'), preload: 'auto', autoplay: 'true', loop: 'loop', muted: 'muted', volume: '0'}
+      %source{src: 'https://s3-eu-west-1.amazonaws.com/static.soslide.com/video/home.mp4', type:'video/mp4'}
+      %source{src: 'https://s3-eu-west-1.amazonaws.com/static.soslide.com/video/home.webm', type:'video/webm'}
+  .message
+    %h1
+      = t '.welcome.title'
+    %h1
+      %small= t '.welcome.subtitle'
+    = link_to  t('.welcome.examples'), '#examples'
+  .scroll
+    .fa.fa-angle-double-down.fa-5x
+-#%section#register
+
+-#%section#register.row
   .col-md-5.col-md-offset-2
-    %h1=t 'quote'
+    %h1
+      =t '.welcome.title'
+      %br
+      %small= t '.welcome.subtitle'
   .col-md-4
     = simple_form_for @site do |f|
       = f.input :email, placeholder: 'your@email.com', input_html: { autofocus: :autofocus, class: 'input-lg' }
@@ -39,29 +69,37 @@
           .fa.fa-heart.fa-5x
           = t('.love.title')
         .description=t('.love.description')
-%section#pricing
-  .row
-    .col-md-10.col-md-offset-1
-      %h1= t '.pricing.title'
-      %h3= t '.pricing.subtitle'
-  .row
-    .col-md-2.col-md-offset-3
-      %h1 Free
-      %h4 $0
-      %p 250 images
-      %p soslide.com domain
-      %p Your site will be disabled after 12 hours.
-    .col-md-2
-      %h1 Pro
-      %h4
-        $20
-        %small /month
-      %p 250 images
-      %p 1 custom domain
-    .col-md-2
-      %h1 Custon plan
-      %h4 on demand
-      %p unlimited images
-      %p unlimited sites
-    .col-md-6.col-md-offset-5
-      =link_to 'Start a free trial', '#register', class: 'btn btn-success btn-lg'
+%section#pricing.row
+  .col-sm-10.col-sm-offset-1
+    %h1= t '.pricing.title'
+    %h3= t '.pricing.subtitle'
+    .col-sm-4
+      .pricing
+        %h1
+          .fa.fa-star.fa-5x
+        %h1
+          = t 'pricing.pro.title'
+        %h4= t 'pricing.pro.price'
+        %p= t 'pricing.pro.description1'
+        %p= t 'pricing.pro.description2'
+        = link_to t('.start'), '#register', class: 'btn btn-success btn-lg'
+    .col-sm-4
+      .pricing
+        %h1
+          .fa.fa-plus.fa-5x
+        %h1
+          = t 'pricing.extended.title'
+        %h4= t 'pricing.extended.price'
+        %p= t 'pricing.extended.description1'
+        %p= t 'pricing.extended.description2'
+        = link_to t('coming_soon'), '#', class: 'btn btn-success btn-lg disabled'
+    .col-sm-4
+      .pricing
+        %h1
+          .fa.fa-gears.fa-5x
+        %h1
+          = t 'pricing.custom.title'
+        %h4= t 'pricing.custom.price'
+        %p= t 'pricing.custom.description1'
+        %p= t 'pricing.custom.description2'
+        = link_to t('contact_us'), 'mailto: contact@soslide.com', class: 'btn btn-success btn-lg'
