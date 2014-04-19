@@ -6,10 +6,10 @@ en:
       description1: Your domain
       description2: 250 images
     extended:
-      title: Pro extended
-      price: coming soon
+      title: Student
+      price: $15
       description1: Your domain
-      description2: coming soon
+      description2: 250 images
     custom:
       title: Custom
       price: on demand

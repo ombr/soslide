@@ -1,6 +1,36 @@
 fr:
+  pricing:
+    pro:
+      title: Pro
+      price: 20€
+      description1: Votre nom de domaine
+      description2: 250 photos
+    extended:
+      title: Etudiant
+      price: 10€
+      description1: Votre nom de domaine
+      description2: 250 photos
+    custom:
+      title: Custom
+      price: A la demande
+      description1: Votre nom de domaine
+      description2: Nombre d'image illimité
   sites:
     new:
       welcome:
-        title: 'Soyez Simple'
+        title: Soyez Simple
         subtitle: Montrez votre travail, partout, sans attendre.
+        examples: Quelques exemples.
+      try: Créer mon site
+      speed:
+        title: Rapide
+        description: N'attendez plus pour montrer vos photos.
+      devices:
+        title: Multi plateformes
+        description: Un site unique et automatiquement adaptable à chacun de vos appareils.
+      love:
+        title: Fait avec amour
+        description: Nous testons notre service intensivement afin de vous garantir le meilleur résultat.
+      pricing:
+         title: Prix
+  date:
