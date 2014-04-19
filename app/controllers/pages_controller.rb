@@ -5,10 +5,14 @@ class PagesController < ApplicationController
   private
 
   def layout_for_page
-    if %w[500 404 503].include?(params[:id])
+    if %w( 500 404 503 ).include?(params[:id])
       'standalone'
     else
       'application'
     end
+  end
+
+  def page_finder_factory
+    PageFinder
   end
 end
