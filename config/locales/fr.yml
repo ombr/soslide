@@ -1,7 +1,9 @@
 fr:
+  fr: Francais
+  en: Anglais
   pricing:
     pro:
-      title: Pro
+      title: Professionnel
       price: 20€
       description1: Votre nom de domaine
       description2: 250 photos
@@ -20,7 +22,7 @@ fr:
       welcome:
         title: Soyez Simple
         subtitle: Montrez votre travail, partout, sans attendre.
-        examples: Quelques exemples.
+        examples: Voir des exemples.
       try: Créer mon site
       speed:
         title: Rapide
