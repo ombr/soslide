@@ -40,14 +40,18 @@
       = f.submit t('.try'), class: 'btn btn-lg btn-success'
 %section#examples.row
   .col-sm-10.col-sm-offset-1
-    %h1= t '.examples'
+    %h1
+      = t '.examples.title'
+      %small= t '.examples.subtitle'
     - [ 'studiocuicui.fr', 'karimdaher.portfoli.fr' , 'ombr.portfoli.fr'].each do |site|
       .col-md-4
         =link_to "http://#{site}", alt: site, target: '_blank' do
           = cl_image_tag("http://#{site}", sign_url: true, type: 'url2png', width: 500, gravity: :north, class: 'img-responsive')
 %section#features.row
   .col-sm-10.col-sm-offset-1
-    %h1= t '.features'
+    %h1
+      = t '.features.title'
+      %small= t '.features.subtitle'
     .col-sm-4
       .feature
         %h1
@@ -71,12 +75,23 @@
         .description=t('.love.description')
 %section#pricing.row
   .col-sm-10.col-sm-offset-1
-    %h1= t '.pricing.title'
-    %h3= t '.pricing.subtitle'
+    %h1
+      = t '.pricing.title'
+      %small= t '.pricing.subtitle'
     .col-sm-4
       .pricing
         %h1
-          .fa.fa-star.fa-5x
+          .fa.fa-book.fa-5x
+        %h1
+          = t 'pricing.student.title'
+        %h4= t 'pricing.student.price'
+        %p= t 'pricing.student.description1'
+        %p= t 'pricing.student.description2'
+        = link_to t('coming_soon'), '#', class: 'btn btn-success btn-lg disabled'
+    .col-sm-4
+      .pricing
+        %h1
+          .fa.fa-briefcase.fa-5x
         %h1
           = t 'pricing.pro.title'
         %h4= t 'pricing.pro.price'
@@ -86,17 +101,7 @@
     .col-sm-4
       .pricing
         %h1
-          .fa.fa-plus.fa-5x
-        %h1
-          = t 'pricing.extended.title'
-        %h4= t 'pricing.extended.price'
-        %p= t 'pricing.extended.description1'
-        %p= t 'pricing.extended.description2'
-        = link_to t('coming_soon'), '#', class: 'btn btn-success btn-lg disabled'
-    .col-sm-4
-      .pricing
-        %h1
-          .fa.fa-gears.fa-5x
+          .fa.fa-magic.fa-5x
         %h1
           = t 'pricing.custom.title'
         %h4= t 'pricing.custom.price'

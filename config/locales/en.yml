@@ -5,7 +5,7 @@ en:
       price: $25
       description1: Your domain
       description2: 250 images
-    extended:
+    student:
       title: Student
       price: $15
       description1: Your domain
@@ -33,6 +33,13 @@ en:
         description: We are testing our software hard to deliver the best experience.
       pricing:
          title: Pricing
+         subtitle: Get started right away. 15 days trial.
+      features:
+        title: Features
+        subtitle: and a lot more to come.
+      examples:
+        title: Examples
+        subtitle: they trust us.
   date:
     formats:
       default: '%m/%d/%Y'

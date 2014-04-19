@@ -5,7 +5,7 @@ fr:
       price: 20€
       description1: Votre nom de domaine
       description2: 250 photos
-    extended:
+    student:
       title: Etudiant
       price: 10€
       description1: Votre nom de domaine
@@ -32,5 +32,6 @@ fr:
         title: Fait avec amour
         description: Nous testons notre service intensivement afin de vous garantir le meilleur résultat.
       pricing:
-         title: Prix
+        title: Prix
+        subtitle: ??
   date:

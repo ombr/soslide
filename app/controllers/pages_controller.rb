@@ -1,3 +1,4 @@
+# PageController
 class PagesController < ApplicationController
   include HighVoltage::StaticPage
   layout :layout_for_page
