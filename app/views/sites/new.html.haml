@@ -23,14 +23,12 @@
     = link_to  t('.welcome.examples'), '#examples'
   .scroll
     .fa.fa-angle-double-down.fa-5x
--#%section#register
-
--#%section#register.row
-  .col-md-5.col-md-offset-2
+%section#register.row
+  .col-md-5.col-md-offset-1
     %h1
-      =t '.welcome.title'
-      %br
-      %small= t '.welcome.subtitle'
+      =t '.register.title'
+    %h1
+      %small= t '.register.subtitle'
   .col-md-4
     = simple_form_for @site do |f|
       = f.input :email, placeholder: 'your@email.com', input_html: { autofocus: :autofocus, class: 'input-lg' }

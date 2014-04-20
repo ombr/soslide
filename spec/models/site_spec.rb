@@ -39,12 +39,11 @@ describe Site do
     end
     context 'when everything is done' do
       subject do
-        create :site,
-          status_dns: true,
-          status_monitoring: true,
-          status_domain: true,
-          status_app: true,
-          status_database: true
+        create :site, status_dns: true,
+                      status_monitoring: true,
+                      status_domain: true,
+                      status_app: true,
+                      status_database: true
       end
       it { expect(subject.progress).to eq 100 }
     end
