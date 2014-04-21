@@ -31,7 +31,7 @@
       %small= t '.register.subtitle'
   .col-md-4
     = simple_form_for @site do |f|
-      = f.input :email, placeholder: 'your@email.com', input_html: { autofocus: :autofocus, class: 'input-lg' }
+      = f.input :email, placeholder: 'your@email.com', input_html: { class: 'input-lg' }
       .site-name
         %span.url= ".#{ENV['SITES_DOMAINS']}"
         = f.input :name, label: '', input_html: { class: 'input-lg'}
