@@ -1,17 +1,17 @@
 en:
-  description:  SoSlide is a platform to build and host Professional Websites. Each website is simple and fast to make sure your content can be seen everywhere and on all devices.
-  copyright: © 2014 Soslide, All Rights Reserved
+  description:  So Slide is a platform to build and host Professional Websites. Each website is simple and fast to make sure your content can be seen everywhere and on all devices.
+  copyright: © 2014 So slide, All Rights Reserved
   fr: French
   en: English
   pricing:
     pro:
       title: Pro
-      price: $25
+      price: $25 / month
       description1: Your domain
       description2: 250 images
     student:
       title: Student
-      price: $15
+      price: $15 / month
       description1: Your domain
       description2: 250 images
     custom:
@@ -21,6 +21,9 @@ en:
       description2: unlimited images
   sites:
     new:
+      register:
+        title: Start your trial
+        subtitle: Create your website
       welcome:
         title: Be Simple
         subtitle: Show your work quickly on every devices.
@@ -43,7 +46,7 @@ en:
         subtitle: and a lot more to come.
       examples:
         title: Examples
-        subtitle: they trust us.
+        subtitle: 
   date:
     formats:
       default: '%m/%d/%Y'

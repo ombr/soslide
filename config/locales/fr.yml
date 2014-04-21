@@ -1,24 +1,29 @@
 fr:
+  description:  SoSlide est une plateforme qui permet de créer et héberger des sites internet professionnels. Chaque site est fait de manière simple et rapide afin de vous permerttre d'afficher votre contenu de manière optimale quelle que soit l'appareil utilisé.
+  copyright: © 2014 Soslide, All Rights Reserved
   fr: Francais
   en: Anglais
   pricing:
     pro:
       title: Professionnel
-      price: 20€
+      price: 20€ / mois
       description1: Votre nom de domaine
       description2: 250 photos
     student:
       title: Etudiant
-      price: 10€
+      price: 10€ / mois
       description1: Votre nom de domaine
       description2: 250 photos
     custom:
-      title: Custom
+      title: Personnalisable
       price: A la demande
       description1: Votre nom de domaine
       description2: Nombre d'image illimité
   sites:
     new:
+      register:
+        title: Essayez gratuitement
+        subtitle: Créer votre site
       welcome:
         title: Soyez Simple
         subtitle: Montrez votre travail, partout, sans attendre.
@@ -28,12 +33,20 @@ fr:
         title: Rapide
         description: N'attendez plus pour montrer vos photos.
       devices:
-        title: Multi plateformes
-        description: Un site unique et automatiquement adaptable à chacun de vos appareils.
+        title: Multi-plateformes
+        description: Un site unique et automatiquement adapté à chacuns de vos appareils.
       love:
         title: Fait avec amour
-        description: Nous testons notre service intensivement afin de vous garantir le meilleur résultat.
+        description: Nous testons notre service de manière intensive afin de vous garantir un résultat optimal.
       pricing:
         title: Prix
-        subtitle: ??
+        subtitle: Commencez immédiatement avec 15 jours d'essais 
+       features:
+        title: Fonctionnalités
+        subtitle: 
+      examples:
+        title: Exemples
+        subtitle: 
   date:
+
+
