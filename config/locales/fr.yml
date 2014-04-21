@@ -15,8 +15,8 @@ fr:
       description1: Votre nom de domaine
       description2: 250 photos
     custom:
-      title: Personnalisable
-      price: A la demande
+      title: A la demande
+      price: Sur devis
       description1: Votre nom de domaine
       description2: Nombre d'image illimité
   sites:
@@ -37,13 +37,13 @@ fr:
         description: Un site unique et automatiquement adapté à chacuns de vos appareils.
       love:
         title: Fait avec amour
-        description: Nous testons notre service de manière intensive afin de vous garantir un résultat optimal.
+        description: Nous testons notre service de manière intensive afin de vous garantir une experience optimale.
       pricing:
         title: Prix
         subtitle: Commencez immédiatement avec 15 jours d'essais
       features:
         title: Fonctionnalités
-        subtitle:
+        subtitle: ''
       examples:
         title: Exemples
-        subtitle:
+        subtitle: ''
