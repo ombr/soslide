@@ -21,13 +21,13 @@ fr:
       description2: Nombre d'image illimité
   sites:
     new:
-      register:
-        title: Essayez gratuitement
-        subtitle: Créer votre site
       welcome:
         title: Soyez Simple
         subtitle: Montrez votre travail, partout, sans attendre.
         examples: Voir des exemples.
+      register:
+        title: Essayez gratuitement
+        subtitle: Créer votre site
       try: Créer mon site
       speed:
         title: Rapide
@@ -40,13 +40,10 @@ fr:
         description: Nous testons notre service de manière intensive afin de vous garantir un résultat optimal.
       pricing:
         title: Prix
-        subtitle: Commencez immédiatement avec 15 jours d'essais 
-       features:
+        subtitle: Commencez immédiatement avec 15 jours d'essais
+      features:
         title: Fonctionnalités
-        subtitle: 
+        subtitle:
       examples:
         title: Exemples
-        subtitle: 
-  date:
-
-
+        subtitle:

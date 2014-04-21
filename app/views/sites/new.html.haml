@@ -36,12 +36,13 @@
         %span.url= ".#{ENV['SITES_DOMAINS']}"
         = f.input :name, label: '', input_html: { class: 'input-lg'}
       = f.submit t('.try'), class: 'btn btn-lg btn-success'
+      = link_to t('.log_in'), '#'
 %section#examples.row
   .col-sm-10.col-sm-offset-1
     %h1
       = t '.examples.title'
       %small= t '.examples.subtitle'
-    - [ 'studiocuicui.fr', 'karimdaher.portfoli.fr' , 'ombr.portfoli.fr'].each do |site|
+    - [ 'studiocuicui.fr', 'karimdaher.portfoli.fr' , 'arnaudwink.com'].each do |site|
       .col-md-4
         =link_to "http://#{site}", alt: site, target: '_blank' do
           = cl_image_tag("http://#{site}", sign_url: true, type: 'url2png', width: 500, gravity: :north, class: 'img-responsive')
