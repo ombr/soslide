@@ -20,7 +20,10 @@ en:
       description1: Your domain
       description2: unlimited images
   sites:
+    login:
+      submit: Go
     new:
+      log_in: I already have a site
       register:
         title: Start your trial
         subtitle: Create your website

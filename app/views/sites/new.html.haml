@@ -36,7 +36,7 @@
         %span.url= ".#{ENV['SITES_DOMAINS']}"
         = f.input :name, label: '', input_html: { class: 'input-lg'}
       = f.submit t('.try'), class: 'btn btn-lg btn-success'
-      = link_to t('.log_in'), '#'
+      = link_to t('.log_in'), login_sites_path
 %section#examples.row
   .col-sm-10.col-sm-offset-1
     %h1
@@ -86,7 +86,7 @@
         %h4= t 'pricing.student.price'
         %p= t 'pricing.student.description1'
         %p= t 'pricing.student.description2'
-        = link_to t('coming_soon'), '#', class: 'btn btn-success btn-lg disabled'
+        = link_to t('.start'), '#register', class: 'btn btn-success btn-lg'
     .col-sm-4
       .pricing
         %h1

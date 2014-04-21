@@ -93,4 +93,27 @@ describe SitesController do
     end
   end
 
+  describe 'GET login' do
+    before :each do
+      get :login
+    end
+    it_responds_200
+  end
+
+  describe 'POST search' do
+    render_views
+
+    it 'assigns the site list' do
+      site
+      post :search, site: { email: 'luc@boissaye.fr' }
+      expect(assigns(:sites)).to eq [site]
+    end
+
+    it 'redirect to the site if there is only one site' do
+      site
+      post :search, site: { email: 'luc@boissaye.fr' }
+      expect(response).to redirect_to site.admin_url
+    end
+  end
+
 end
