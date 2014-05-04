@@ -42,10 +42,10 @@
     %h1
       = t '.examples.title'
       %small= t '.examples.subtitle'
-    - [ 'studiocuicui.fr', 'karimdaher.portfoli.fr' , 'arnaudwink.com'].each do |site|
-      .col-md-4
+    - [ 'studiocuicui.fr', 'seb.portfoli.fr' , 'arnaudwink.com'].each do |site|
+      .col-md-4.example
         =link_to "http://#{site}", alt: site, target: '_blank' do
-          = cl_image_tag("http://#{site}", sign_url: true, type: 'url2png', width: 500, gravity: :north, class: 'img-responsive')
+          = cl_image_tag("http://#{site}",type: 'url2png', transformation: { crop: :fill, width: 500, height: 350, gravity: :north, fetch_format: :png }, sign_url: true, class: 'img-responsive')
 %section#features.row
   .col-sm-10.col-sm-offset-1
     %h1

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/cloudinary/cloudinary_gem.git
-  revision: 22976a946af30ac7f86dc0a3a81998ba9579d886
+  revision: 750c02ec6e51fa2def5f9613d6232b5e2458b8aa
   branch: master
   specs:
     cloudinary (1.0.72)

@@ -25,8 +25,8 @@ en:
     new:
       log_in: I already have a site
       register:
-        title: Start your trial
-        subtitle: Create your website
+        title: Create your site
+        subtitle: 15 days trial
       welcome:
         title: Be Simple
         subtitle: Show your work quickly on every devices.
@@ -39,7 +39,7 @@ en:
         title: Multi devices
         description: One responsive website for all devices any time any where.
       love:
-        title: Made with love
+        title: Made for sharing
         description: We are testing our software hard to deliver the best experience.
       pricing:
          title: Pricing
