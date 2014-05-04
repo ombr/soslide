@@ -34,9 +34,9 @@ en:
       try: Create my site
       speed:
         title: Fast
-        description: Do not wait anymore to show your pictures.
+        description: Do not wait any longer to show your pictures.
       devices:
-        title: Multi devices
+        title: Every device
         description: One responsive website for all devices any time any where.
       love:
         title: Made for sharing
@@ -49,7 +49,6 @@ en:
         subtitle: and a lot more to come.
       examples:
         title: Examples
-        subtitle: 
   date:
     formats:
       default: '%m/%d/%Y'

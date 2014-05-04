@@ -3,6 +3,7 @@ fr:
   copyright: © 2014 Soslide, All Rights Reserved
   fr: Francais
   en: Anglais
+  contact_us: Contactez-nous
   pricing:
     pro:
       title: Professionnel
@@ -22,11 +23,12 @@ fr:
   sites:
     new:
       welcome:
-        title: Soyez Simple
+        title: Faites simples
         subtitle: Montrez votre travail, partout, sans attendre.
         examples: Voir des exemples.
+      log_in: J'ai déjà un site
       register:
-        title: Créer votre site
+        title: Créez votre site
         subtitle: 15 jours d'essais.
       try: Créer mon site
       speed:
@@ -36,7 +38,7 @@ fr:
         title: Multi-plateformes
         description: Un site unique et automatiquement adapté à chacuns de vos appareils.
       love:
-        title: Fait avec amour
+        title: A partager sans modération
         description: Nous testons notre service de manière intensive afin de vous garantir une experience optimale.
       pricing:
         title: Prix
