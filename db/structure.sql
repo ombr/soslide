@@ -178,7 +178,8 @@ CREATE TABLE sites (
     heroku_name character varying(255),
     pages integer,
     images integer,
-    infos text
+    infos text,
+    "user" hstore
 );
 
 
@@ -407,3 +408,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140523091805');
 INSERT INTO schema_migrations (version) VALUES ('20140614060955');
 
 INSERT INTO schema_migrations (version) VALUES ('20140615204511');
+
+INSERT INTO schema_migrations (version) VALUES ('20140615211326');

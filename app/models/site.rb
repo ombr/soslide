@@ -187,6 +187,7 @@ class Site < ActiveRecord::Base
         users: connection.execute('SELECT * FROM users').to_a,
         sites: connection.execute('SELECT * FROM sites').to_a
       }
+      self.user = infos.try(:[], :users).try(:first)
     end
     save!
   end
